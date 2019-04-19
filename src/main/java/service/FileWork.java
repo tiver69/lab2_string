@@ -9,22 +9,22 @@ public class FileWork {
      * @return String text variable
      */
     public static String readAsString(String filePath){
-        String textFromFile = "";
+        StringBuilder textFromFile = new StringBuilder();
 
         try (BufferedReader readFile = new BufferedReader(
                 new FileReader(filePath))) {
             String stringBuff = "";
             while ((stringBuff = readFile.readLine()) != null) {
-                textFromFile += stringBuff;
-                textFromFile += "\n";
+                textFromFile.append(stringBuff);
+                textFromFile.append("\n");
 //                System.out.println(stringBuff);
             }
         }
         catch (IOException e){
             System.out.println("Error while reading file!");
-            System.out.println(e.getStackTrace());
+            e.printStackTrace();
         }
-        return textFromFile;
+        return textFromFile.toString();
     }
 
 }

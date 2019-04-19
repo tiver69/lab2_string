@@ -7,15 +7,33 @@ import java.util.regex.Pattern;
 
 public class RegularExpressionFilter {
 
-    public static Set<String> firstVowel (String text){
-        String pattern01 = "\\b[AEIOUYaeiouy].+?\\b";
+    private static String firstVowelTextPattern = "\\b[AEIOUYaeiouy].+?\\b";
+    private static String firstConsonantWordPattern = "[^AEIOUYaeiouy].+?$";
 
-        Matcher m = Pattern.compile(pattern01).matcher(text);
+    public static Set<String> firstVowelText(String text){
+
+        Matcher m = Pattern.compile(firstVowelTextPattern).matcher(text);
         Set<String> words = new HashSet<String>();
         while (m.find()){
-            System.out.print(m.group() + "-");
+//            System.out.print(m.group() + "-");
             words.add(m.group());
         }
         return words;
     }
+
+    public static String firstConsonantWord(String word){
+        Matcher m = Pattern.compile(firstConsonantWordPattern).matcher(word);
+        int count = 0;
+        String buff = "";
+
+        while (m.find()){
+            count++;
+            buff = m.group();
+//            System.out.println(buff);
+        }
+        if (count == 1)
+            return buff;
+        else return "";
+    }
+
 }
