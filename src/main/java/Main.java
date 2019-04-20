@@ -15,10 +15,17 @@ public class Main {
         HashSet<String> words = (HashSet<String>) RegularExpressionFilter.firstVowelText(text);
         System.out.println("Before sorting:\n" + words);
 
-        Set<String> test = new TreeSet<String>(new StringTaskComparator());
+        Set<String> test = new TreeSet<>(new StringTaskComparator());
         test.addAll(RegularExpressionFilter.firstVowelText(text));
-
         System.out.println("After sorting:\n" +  test);
+        System.out.println("Everything ok: "+ words.equals(test));
+
+        Set<String> test2 = new TreeSet<>();
+        for (String word: words) {
+            test2.add(RegularExpressionFilter.firstConsonantWord(word));
+        }
+        System.out.println("\nSorted by:\n" +  test2);
+
 
     }
 }
