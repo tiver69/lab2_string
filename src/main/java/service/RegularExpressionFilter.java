@@ -1,5 +1,10 @@
 package service;
 
+import model.text.Grammar;
+import model.text.Sentence;
+import model.text.Text;
+import model.text.Word;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -8,6 +13,7 @@ import java.util.regex.Pattern;
 public class RegularExpressionFilter {
 
     private static String firstVowelTextPattern = "\\b[AEIOUYaeiouy].*?\\b";
+    private static String firstVowelWordPattern = "^[AEIOUYaeiouy].*";
     private static String firstConsonantWordPattern = "[^AEIOUYaeiouy].*?$";
     private static String twoMoreSpacesPattern = "[\\s]{2,}";
     private static String delimiterBeforePunctuationPattern = "\\b [.,?!]";
@@ -19,8 +25,22 @@ public class RegularExpressionFilter {
                 .matcher(correctDelimiters(text));
         Set<String> words = new HashSet<>();
         while (m.find()){
-//            System.out.print(m.group() + "-");
+//            System.out.print(m.group() + " ");
             words.add(m.group().toLowerCase());
+        }
+        return words;
+    }
+
+    public static Set<String> firstVowelText(Text text){
+        Set<String> words = new HashSet<>();
+
+        for (Sentence sentence: text.getText()){
+            for(Grammar grammar: sentence.getSentence()){
+                if (grammar instanceof Word &&
+                        ((Word) grammar).getWord().matches(firstVowelWordPattern)){
+                    words.add(((Word) grammar).getWord().toLowerCase());
+                }
+            }
         }
         return words;
     }

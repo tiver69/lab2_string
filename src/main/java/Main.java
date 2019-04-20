@@ -1,4 +1,5 @@
 import model.StringTaskComparator;
+import model.text.Text;
 import service.*;
 
 import java.util.HashSet;
@@ -9,23 +10,27 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String text = FileWork.readAsString("input.txt");
-        System.out.println(text);
+        String inputText = FileWork.readAsString("input.txt");
+        Text convertedText = TextParser.parseText(inputText);
+        System.out.println(inputText);
 
-        HashSet<String> words = (HashSet<String>) RegularExpressionFilter.firstVowelText(text);
-        System.out.println("Before sorting:\n" + words);
+        Set<String> wordsFromInput = RegularExpressionFilter.firstVowelText(inputText);
+        System.out.println("Input before sorting:\n" + wordsFromInput);
+
+        Set<String> wordsFromConverted = RegularExpressionFilter.firstVowelText(convertedText);
+        System.out.println("Converted before sorting:\n" + wordsFromConverted);
+        System.out.println("Same? : "+ wordsFromConverted.equals(wordsFromConverted));
 
         Set<String> test = new TreeSet<>(new StringTaskComparator());
-        test.addAll(RegularExpressionFilter.firstVowelText(text));
-        System.out.println("After sorting:\n" +  test);
-        System.out.println("Everything ok: "+ words.equals(test));
+        test.addAll(RegularExpressionFilter.firstVowelText(inputText));
+        System.out.println("\nAfter sorting:\n" +  test);
 
         Set<String> test2 = new TreeSet<>();
-        for (String word: words) {
+        for (String word: wordsFromInput) {
             test2.add(RegularExpressionFilter.firstConsonantWord(word));
         }
-        System.out.println("\nSorted by:\n" +  test2);
+        System.out.println("Sorted by:\n" +  test2);
 
-
+        System.out.println("Everything was sorted? : "+ wordsFromInput.equals(test));
     }
 }
