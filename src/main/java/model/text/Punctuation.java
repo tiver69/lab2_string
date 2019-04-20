@@ -3,8 +3,21 @@ package model.text;
 public class Punctuation extends Grammar {
     private String punctuation;
 
-    private Punctuation(PunctuationBuilder builder){
-        this.punctuation = builder.punctuation;
+    public Punctuation(String  punctuation){
+        this.punctuation = punctuation;
+    }
+
+    public String getPunctuation() {
+        return punctuation;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Punctuation)) return false;
+
+        Punctuation otherWord = (Punctuation) obj;
+        return punctuation.equals(otherWord.getPunctuation());
     }
 
     @Override
@@ -12,19 +25,4 @@ public class Punctuation extends Grammar {
         return punctuation;
     }
 
-    public static class PunctuationBuilder {
-        private String punctuation;
-        private String allPunctuation = ".,?!'\":;-()";
-
-        public PunctuationBuilder(String punctuation){
-            if (allPunctuation.lastIndexOf(punctuation) != -1)
-                this.punctuation = punctuation;
-            else throw new IllegalArgumentException("Symbol is not a punctuation!");
-        }
-
-        public Punctuation build(){
-            return new Punctuation(this);
-        }
-
-    }
 }

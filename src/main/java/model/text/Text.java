@@ -1,20 +1,24 @@
 package model.text;
 
-import model.text.Sentence;
-
 import java.util.LinkedList;
 import java.util.List;
 
 public class Text {
-
     private List<Sentence> text = new LinkedList();
 
-    public Text() {
+    public Text(){
     }
 
-    public boolean addToText(Sentence sentence) {
+    public Text(TextBuilder builder) {
+        text.addAll(builder.text);
+    }
+
+    public List<Sentence> getText() {
+        return new LinkedList<>(text);
+    }
+
+    public void addToText(Sentence sentence) {
         text.add(sentence);
-        return true;
     }
 
     @Override
@@ -25,4 +29,27 @@ public class Text {
         }
         return sentenceCurrent.toString().trim();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Text)) return false;
+
+        Text otherText = (Text) obj;
+        return text.equals(otherText.getText());
+    }
+
+    public static class TextBuilder {
+        private List<Sentence> text = new LinkedList();
+
+        public TextBuilder addToSentence(Sentence sentence) {
+            text.add(sentence);
+            return this;
+        }
+
+        public Text build(){
+            return new Text(this);
+        }
+    }
+
 }
