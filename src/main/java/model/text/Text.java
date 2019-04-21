@@ -42,7 +42,7 @@ public class Text {
     public static class TextBuilder {
         private List<Sentence> text = new LinkedList();
 
-        public TextBuilder addToSentence(Sentence sentence) {
+        public TextBuilder addToText(Sentence sentence) {
             text.add(sentence);
             return this;
         }

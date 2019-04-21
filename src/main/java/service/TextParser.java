@@ -1,6 +1,5 @@
 package service;
 
-import model.text.Grammar;
 import model.text.Sentence;
 import model.text.Text;
 
@@ -13,7 +12,7 @@ public class TextParser {
     private static String SentenceParsePattern = "[.]{3}|\\p{Punct}|[\\P{Punct}&&\\S]+";
 
     public static Text parseText(String toParse){
-        Text resultText = new Text();
+        Text.TextBuilder resultText = new Text.TextBuilder();
         Matcher m2 = Pattern.compile(TextParsePattern)
                 .matcher(RegularExpressionFilter.correctDelimiters(toParse));
 
@@ -21,20 +20,18 @@ public class TextParser {
             resultText.addToText(parseSentence(m2.group()));
 //            System.out.println(m2.group());
         }
-        return resultText;
+        return resultText.build();
 
     }
 
     public static Sentence parseSentence(String toParse){
-        Sentence resultSentence = new Sentence();
+        Sentence.SentenceBuilder resultSentence = new Sentence.SentenceBuilder();
         Matcher m2 = Pattern.compile(SentenceParsePattern)
                 .matcher(RegularExpressionFilter.correctDelimiters(toParse));
 
         while (m2.find()) {
-            resultSentence.addToSentence(
-                    new Grammar.GrammarBuilder(m2.group())
-                            .build());
+            resultSentence.addToSentence(m2.group());
         }
-        return resultSentence;
+        return resultSentence.build();
     }
 }

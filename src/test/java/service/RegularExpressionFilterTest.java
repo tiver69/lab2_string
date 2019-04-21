@@ -11,23 +11,24 @@ import static org.hamcrest.CoreMatchers.equalTo;
 
 public class RegularExpressionFilterTest {
 
-    public static String firstVowelText = "   afurfh, a .,uehbveo ?trwger... sdfcjn    we en???";
+    public static String firstVowelText = "   Apple, fruit .available ?Phone... Yes    good idea?";
+    public static String correctDelimitersExpectedResult = "Apple, fruit. available? Phone... Yes good idea?";
     public static Set<String> firstVowelExpectedResult = new HashSet<>();
     public static Set<String> firstConsonantWords = new HashSet<>();
     public static Set<String> firstConsonantExpectedResult = new HashSet<>();
 
     @BeforeClass
     public static void setUpClass(){
-        firstVowelExpectedResult.add("afurfh");
-        firstVowelExpectedResult.add("uehbveo");
-        firstVowelExpectedResult.add("en");
-        firstVowelExpectedResult.add("a");
+        firstVowelExpectedResult.add("apple");
+        firstVowelExpectedResult.add("available");
+        firstVowelExpectedResult.add("yes");
+        firstVowelExpectedResult.add("idea");
 
         firstConsonantWords.addAll(firstVowelExpectedResult);
-        firstConsonantExpectedResult.add("furfh");
-        firstConsonantExpectedResult.add("hbveo");
-        firstConsonantExpectedResult.add("n");
-        firstConsonantExpectedResult.add("a");
+        firstConsonantExpectedResult.add("pple");
+        firstConsonantExpectedResult.add("vailable");
+        firstConsonantExpectedResult.add("s");
+        firstConsonantExpectedResult.add("dea");
     }
 
     @Test
@@ -55,7 +56,6 @@ public class RegularExpressionFilterTest {
     @Test
     public void correctDelimitersTest() {
         String testResult = RegularExpressionFilter.correctDelimiters(firstVowelText);
-        String correctDelimitersExpectedResult = "afurfh, a., uehbveo? trwger... sdfcjn we en???";
         System.out.println(testResult);
         System.out.println(correctDelimitersExpectedResult);
         Assert.assertThat("String must be equal",

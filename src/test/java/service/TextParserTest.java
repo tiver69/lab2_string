@@ -14,45 +14,45 @@ import static org.junit.Assert.*;
 
 public class TextParserTest {
 
-    public static String text = "   afurfh, a .uehbveo ?trwger... sdfcjn    we en?";
-    public static String sentence = "   afurfh, a .";;
+    public static String text = "   Hello, hello .Ok ?Tired... How    are you?";
+    public static String sentence = "   Hello, hello .";;
     public static Text expectedTextParse;
     public static Sentence expectedSentenceParse;
 
     @BeforeClass
     public static void setUpClass(){
         expectedSentenceParse = new Sentence.SentenceBuilder()
-                .addToSentence("afurfh")
+                .addToSentence("Hello")
                 .addToSentence(",")
-                .addToSentence("a")
+                .addToSentence("hello")
                 .addToSentence(".")
                 .build();
         Sentence sentence2 = new Sentence.SentenceBuilder()
-                .addToSentence("uehbveo")
+                .addToSentence("Ok")
                 .addToSentence("?")
                 .build();
         Sentence sentence3 = new Sentence.SentenceBuilder()
-                .addToSentence("trwger")
+                .addToSentence("Tired")
                 .addToSentence("...")
                 .build();
         Sentence sentence4 = new Sentence.SentenceBuilder()
-                .addToSentence("sdfcjn")
-                .addToSentence("we")
-                .addToSentence("en")
+                .addToSentence("How")
+                .addToSentence("are")
+                .addToSentence("you")
                 .addToSentence("?")
                 .build();
         expectedTextParse = new Text.TextBuilder()
-                .addToSentence(expectedSentenceParse)
-                .addToSentence(sentence2)
-                .addToSentence(sentence3)
-                .addToSentence(sentence4)
+                .addToText(expectedSentenceParse)
+                .addToText(sentence2)
+                .addToText(sentence3)
+                .addToText(sentence4)
                 .build();
     }
 
     @Test
     public void parseText() {
         Text resultParse = TextParser.parseText(text);
-//        System.out.println(resultParse);
+        System.out.println(resultParse);
         Assert.assertThat("Text must be equals",
                 resultParse, equalTo(expectedTextParse));
     }
@@ -60,8 +60,8 @@ public class TextParserTest {
     @Test
     public void parseSentenceTest() {
         Sentence resultParse = TextParser.parseSentence(sentence);
-//        System.out.println(resultParse);
-        Assert.assertThat("Text must be equals",
+        System.out.println(resultParse);
+        Assert.assertThat("Sentence must be equals",
                 resultParse, equalTo(expectedSentenceParse));
     }
 }

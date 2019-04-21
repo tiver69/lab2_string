@@ -6,6 +6,7 @@ import java.util.List;
 public class Sentence{
 
     private List<Grammar> sentence = new LinkedList();
+    private static String punctuationPattern = "[.]{3}|\\p{Punct}";
 
     public Sentence(){
     }
@@ -19,9 +20,10 @@ public class Sentence{
     }
 
     public boolean addToSentence(String sentenceItem) {
-        return sentence.add(
-                new Grammar.GrammarBuilder(sentenceItem)
-                        .build());
+        if (sentenceItem.matches(punctuationPattern))
+            return sentence.add(new Punctuation(sentenceItem));
+        else
+            return sentence.add(new Word(sentenceItem));
     }
 
     public boolean addToSentence(Grammar sentenceItem) {
@@ -50,9 +52,10 @@ public class Sentence{
         private List<Grammar> sentence = new LinkedList();
 
         public SentenceBuilder addToSentence(String sentenceItem) {
-            sentence.add(
-                    new Grammar.GrammarBuilder(sentenceItem)
-                            .build());
+            if (sentenceItem.matches(punctuationPattern))
+                sentence.add(new Punctuation(sentenceItem));
+            else
+                sentence.add(new Word(sentenceItem));
             return this;
         }
 
