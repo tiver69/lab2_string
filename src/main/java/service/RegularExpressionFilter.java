@@ -10,6 +10,9 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Contains static methods for filtering text
+ */
 public class RegularExpressionFilter {
 
     private static String firstVowelTextPattern = "\\b[AEIOUYaeiouy].*?\\b";
@@ -19,6 +22,11 @@ public class RegularExpressionFilter {
     private static String delimiterBeforePunctuationPattern = "\\b [.,?!]";
     private static String wordAfterPunctuationPattern = "[.,?!]\\b";
 
+    /**
+     * Looks for all words from text which start from vowel letter
+     * @param text - string variable for filtering
+     * @return Hash Set with words
+     */
     public static Set<String> firstVowelText(String text){
 
         Matcher m = Pattern.compile(firstVowelTextPattern)
@@ -31,6 +39,11 @@ public class RegularExpressionFilter {
         return words;
     }
 
+    /**
+     * Looks for all words from parsed text which start from vowel letter
+     * @param text - Text variable for filtering
+     * @return Hash Set with words
+     */
     public static Set<String> firstVowelText(Text text){
         Set<String> words = new HashSet<>();
 
@@ -45,6 +58,12 @@ public class RegularExpressionFilter {
         return words;
     }
 
+    /**
+     * Looks for part of the word which starts from consonant letter, if there is no consonant letters
+     * in word return the whole word
+     * @param word - string variable for filtering
+     * @return string part of the word
+     */
     public static String firstConsonantWord(String word){
         Matcher m = Pattern.compile(firstConsonantWordPattern).matcher(word);
         int count = 0;
@@ -62,6 +81,13 @@ public class RegularExpressionFilter {
         else return "";
     }
 
+
+    /**
+     * Remove all unnecessary delimiters from the text, enters necessary one
+     * after punctuation
+     * @param text - string variable for correcting
+     * @return string result after corrections
+     */
     public static String correctDelimiters(String text){
 
         return removeDelimitersBeforePunctuation(
@@ -69,6 +95,11 @@ public class RegularExpressionFilter {
         );
     }
 
+    /**
+     * Enters delimiters after punctuations if it is necessary
+     * @param text - string variable for correcting
+     * @return string result after corrections
+     */
     private static String enterSpaceAfterPunctuation(String text){
         String resultText =  removeSpaces(text);
 
@@ -90,7 +121,11 @@ public class RegularExpressionFilter {
         return resultBuilder.toString();
     }
 
-
+    /**
+     * Removes all unnecessary delimiters before punctuations
+     * @param text - string variable for correcting
+     * @return string result after corrections
+     */
     private static String removeDelimitersBeforePunctuation(String text){
         String resultText =  removeSpaces(text);
 
@@ -112,6 +147,11 @@ public class RegularExpressionFilter {
         return resultBuilder.toString();
     }
 
+    /**
+     * Replace all double delimiters with single one
+     * @param text - string variable for correcting
+     * @return string result after corrections
+     */
     public static String removeSpaces(String text){
         String result = text.trim();
         return result.replaceAll(twoMoreSpacesPattern," ");

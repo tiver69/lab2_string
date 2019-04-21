@@ -1,5 +1,8 @@
 package model.text;
 
+/**
+ * Contains only punctuation symbols
+ */
 public class Punctuation extends Grammar {
     private String punctuation;
 

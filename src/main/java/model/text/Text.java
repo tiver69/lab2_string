@@ -3,6 +3,9 @@ package model.text;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Contains text with list of Sentence elements
+ */
 public class Text {
     private List<Sentence> text = new LinkedList();
 

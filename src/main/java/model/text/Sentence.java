@@ -3,6 +3,9 @@ package model.text;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Contains sentence with list of Grammar elements
+ */
 public class Sentence{
 
     private List<Grammar> sentence = new LinkedList();

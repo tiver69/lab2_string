@@ -1,5 +1,8 @@
 package model.text;
 
+/**
+ * Contains only standalone words
+ */
 public class Word extends Grammar {
     private String word;
 

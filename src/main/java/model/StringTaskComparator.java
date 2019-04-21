@@ -4,8 +4,18 @@ import service.RegularExpressionFilter;
 
 import java.util.Comparator;
 
+/**
+ * Comparator implementation for TreeSet constructor
+ */
 public class StringTaskComparator implements Comparator<String> {
 
+    /**
+     * Compare two string by first consonant letter
+     * @param o1 string variable which is up to add in Collection
+     * @param o2 string variable from collection
+     * @return int value 1 if variable from collection is 'lesser', 0 - if variables are equals,
+     * -1 - if variable from collection is 'bigger'
+     */
     @Override
     public int compare(String o1, String o2) {
         if (o1 == null || o2 ==null) throw new NullPointerException("Word is empty");
