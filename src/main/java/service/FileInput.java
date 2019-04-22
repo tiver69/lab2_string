@@ -2,7 +2,7 @@ package service;
 
 import java.io.*;
 
-public class FileWork {
+public class FileInput {
 
     /**
      * Creates text from data file

@@ -7,8 +7,7 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-
-        String inputText = FileWork.readAsString("input.txt");
+        String inputText = FileInput.readAsString("input.txt");
         Text convertedText = TextParser.parseText(inputText);
         System.out.println(inputText);
 
